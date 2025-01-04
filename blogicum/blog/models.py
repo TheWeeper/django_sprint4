@@ -94,11 +94,46 @@ class Post(BaseModel):
         on_delete=models.SET_NULL,
         related_name='category',
     )
+    image = models.ImageField(
+        'Изображение публикации',
+        upload_to='post_images',
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return self.title
+
+    def comment_count(self):
+        comments = self.comments
+        return comments.count()
 
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
         ordering = ('-pub_date',)
+
+
+class Comment(models.Model):
+    text = models.TextField(
+        'Текст комментария',
+    )
+    post = models.ForeignKey(
+        Post,
+        verbose_name='Публикация',
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    author = models.ForeignKey(
+        User,
+        verbose_name='Пользователь',
+        on_delete=models.CASCADE,
+        related_name='comment_author'
+    )
+
+    class Meta:
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ('created_at',)
