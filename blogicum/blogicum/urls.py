@@ -20,6 +20,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.urls import include, path, reverse_lazy
 
+handler404 = 'pages.views.page_not_found'
+handler500 = 'pages.views.internal_server_error'
 
 urlpatterns = [
     path('', include('blog.urls', namespace='blog')),
@@ -36,7 +38,3 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-handler404 = 'pages.views.page_not_found'
-handler403 = 'pages.views.forbidden_request'
-handler500 = 'pages.views.internal_server_error'

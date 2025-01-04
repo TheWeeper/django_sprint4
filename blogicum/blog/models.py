@@ -130,7 +130,6 @@ class Comment(models.Model):
         User,
         verbose_name='Пользователь',
         on_delete=models.CASCADE,
-        related_name='comment_author'
     )
 
     class Meta:

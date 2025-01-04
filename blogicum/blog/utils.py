@@ -1,10 +1,10 @@
-from django.utils.timezone import now
+from django.utils import timezone
 
 
-def get_published_status(queryset):
+def get_published_posts(queryset):
     new_queryset = queryset.filter(
         is_published=True,
-        pub_date__lte=now(),
+        pub_date__lt=timezone.now(),
         category__is_published=True,
     )
     return new_queryset

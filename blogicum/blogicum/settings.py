@@ -140,6 +140,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+CSRF_FAILURE_VIEW = 'pages.views.forbidden_request'
+
 LOGIN_REDIRECT_URL = 'blog:index'
 
 MEDIA_ROOT = BASE_DIR / 'media'
