@@ -113,7 +113,6 @@ class PostDeleteView(AuthorRequiredMixin, ProfileRedirectionMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form = self.form_class(instance=self.object)
-        # Добавляем форму в контекст для отображения в шаблоне.
         context['form'] = form
         return context
 
